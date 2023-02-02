@@ -35,16 +35,16 @@ def most_probable_word(word_count):
         if value > highest_count:
             highest_count = value
             most_probable_word = key
-
+      
     return most_probable_word
 
+while True:
+    prompt = input("Prompt: ")
 
-prompt = input("Prompt: ")
+    possible_words = total_next_outcomes(data, prompt)
 
-possible_words = total_next_outcomes(data, prompt)
+    word_count = probable_next_word(possible_words)
 
-word_count = probable_next_word(possible_words)
+    next_word = most_probable_word(word_count)
 
-next_word = most_probable_word(word_count)
-
-print(next_word)
+    print(next_word)
