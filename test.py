@@ -11,8 +11,12 @@ def total_next_outcomes(data, prompt):
 
     while loop < len(data_list_relationships):
         if data_list_relationships[loop] == prompt:
-            next_word_index = loop + 1
-            next_words.append(data_list_relationships[next_word_index])
+            if (loop + 1) == len(data_list_relationships):
+                next_word_index = 0
+                next_words.append(data_list_relationships[next_word_index])
+            else:
+                next_word_index = loop + 1
+                next_words.append(data_list_relationships[next_word_index])
         loop += 1
 
     return next_words
@@ -27,7 +31,7 @@ def probable_next_word(possible_words):
         else:
             word_count[word] = 1
 
-    # print(word_count)
+    #print(word_count)
     return word_count
 
 
@@ -52,13 +56,15 @@ def most_probable_word(word_count):
 prompt = input("Prompt: ")
 
 while True:
-    
-    possible_words = total_next_outcomes(data, prompt)
+    try:
+        possible_words = total_next_outcomes(data, prompt)
 
-    word_count = probable_next_word(possible_words)
+        word_count = probable_next_word(possible_words)
 
-    next_word = most_probable_word(word_count)
-    time.sleep(1)
-    print(next_word)
-    time.sleep(1)
-    prompt = next_word
+        next_word = most_probable_word(word_count)
+        time.sleep(1)
+        print(next_word)
+        prompt = next_word
+
+    except:
+        break
