@@ -2,23 +2,19 @@ data = "First, the data confirms that our average number of heads does approach 
 
 prompt = input("Prompt: ")
 
-if len(prompt) == 1:
+def total_next_outcomes(data, prompt):
+    data_list_relationships = data.split()
+    loop = 0
 
-    def total_next_outcomes(data, prompt):
-        list(data)
-        loop = 0
+    next_words = []
 
-        next_letters = []
+    while loop < len(data_list_relationships):
+        if data_list_relationships[loop] == prompt:
+            next_word_index = loop + 1
+            next_words.append(data_list_relationships[next_word_index])
+        loop += 1
 
-        while loop < len(data):
-            if data[loop] == prompt:
-                next_letter_index = loop + 1
-                next_letters.append(data[next_letter_index])
-            loop += 1
+    return next_words
 
-        return next_letters
+possible_words = total_next_outcomes(data, prompt)
 
-
-
-
-    print(total_next_outcomes(data, prompt))
