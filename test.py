@@ -75,13 +75,13 @@ while True:
         next_word = most_probable_word(word_count)
         next_word = next_word.split().pop()
 
-        # print(next_word, end=" ")
         context_words.append(next_word)
 
         if next_word.endswith("."):
             break
 
-        prompt = ' '.join(context_words[-2:])
+        # print(' '.join(context_words[-3:]))
+        prompt = ' '.join(context_words[-3:])
 
     except:
         break
