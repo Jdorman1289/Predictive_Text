@@ -79,9 +79,11 @@ while True:
             break
 
         # print(' '.join(context_words[-3:]))
+        print('*' * len(context_words))
+        
         prompt = ' '.join(context_words[-3:])
 
     except:
         break
     
-print(' '.join(context_words))
+print(' ...' + ' '.join(context_words))
