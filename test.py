@@ -1,4 +1,3 @@
-import time
 import random
 from itertools import combinations
  
@@ -42,7 +41,7 @@ def probable_next_word(possible_words):
         else:
             word_count[word] = 1
 
-    print(word_count)
+    #print(word_count)
     return word_count
 
 
@@ -73,8 +72,7 @@ while True:
         word_count = probable_next_word(possible_words)
 
         next_word = most_probable_word(word_count)
-        time.sleep(1)
-        print(next_word)
+        print(next_word, end=" ")
         if next_word.endswith("."):
             break
         prompt = next_word
