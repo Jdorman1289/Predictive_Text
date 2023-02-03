@@ -59,7 +59,7 @@ def most_probable_word(word_count):
             if value > highest_count:
                 highest_count = value
                 most_probable_word = key
-        
+  
         return most_probable_word
 
 
@@ -72,9 +72,13 @@ while True:
         word_count = probable_next_word(possible_words)
 
         next_word = most_probable_word(word_count)
+        next_word = next_word.split().pop()
+
         print(next_word, end=" ")
+
         if next_word.endswith("."):
             break
+        
         prompt = next_word
 
     except:
