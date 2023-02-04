@@ -73,13 +73,18 @@ while True:
         next_word = most_probable_word(word_count)
         next_word = next_word.split().pop()
 
-        context_words.append(next_word)
+        if context_words[-3:] == context_words[-6:-3] and (len(context_words)) != 0:
+            next_word = (next_word) + '.'
+            context_words.append(next_word)
+        else:
+            context_words.append(next_word)
 
         if next_word.endswith("."):
             break
 
         # print(' '.join(context_words[-3:]))
         print('*' * len(context_words))
+
         
         prompt = ' '.join(context_words[-1:])
 
