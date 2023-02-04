@@ -3,7 +3,7 @@ from itertools import combinations
 
 context_words = [] 
 
-with open('shakespeare_set','r') as file:
+with open('small_set.txt','r') as file:
     data = file.read()
 
 def total_next_outcomes(data, prompt):
@@ -40,7 +40,7 @@ def probable_next_word(possible_words):
         else:
             word_count[word] = 1
 
-    # print(word_count)
+    # print(len(word_count))
     return word_count
 
 
@@ -86,9 +86,11 @@ while True:
         print('*' * len(context_words))
 
         
-        prompt = ' '.join(context_words[-1:])
+        prompt = ' '.join(context_words[-3:])
 
-    except:
+
+    except IndexError:
+        print("IndexError")
         break
     
 print(' ...' + ' '.join(context_words))
