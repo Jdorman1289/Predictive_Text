@@ -15,7 +15,7 @@ This script is used to generate text based on Shakespeare's works using an N-gra
 To run the script, type the following command in the terminal:
 
 ```
-python shakespeare_set.py
+python generate.py
 ```
 
 And enter the prompt when prompted. The generated text will be displayed at the end.
