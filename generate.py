@@ -3,7 +3,7 @@ from itertools import combinations
 
 context_words = [] 
 
-with open('small_set.txt','r') as file:
+with open('shakespeare_set','r') as file:
     data = file.read()
 
 def total_next_outcomes(data, prompt):
@@ -81,7 +81,7 @@ while True:
         # print(' '.join(context_words[-3:]))
         print('*' * len(context_words))
         
-        prompt = ' '.join(context_words[-3:])
+        prompt = ' '.join(context_words[-1:])
 
     except:
         break
