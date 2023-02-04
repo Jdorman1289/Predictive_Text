@@ -52,7 +52,7 @@ while True:
         else:
             context_words.append(next_word)
 
-        if next_word.endswith("."):
+        if next_word.endswith(".") or next_word.endswith("?") or next_word.endswith("!"):
             break
 
         print('*' * len(context_words))
