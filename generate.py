@@ -1,5 +1,4 @@
 import random
-from itertools import combinations
 
 context_words = [] 
 
@@ -8,41 +7,20 @@ with open('shakespeare_set.txt','r') as file:
 
 def total_next_outcomes(data, prompt):
     data_list_relationships = data.split()
-
     combo_size = len(prompt.split())
 
-    data_list_relationships = list(combinations(data_list_relationships, combo_size))
-    data_list_relationships = [' '.join(i) for i in data_list_relationships]
+    next_words = {}
 
-    loop = 0
-
-    next_words = []
-
-    while loop < len(data_list_relationships):
-        if data_list_relationships[loop] == prompt:
-            if (loop + 1) == len(data_list_relationships):
-                next_word_index = 0
-                next_words.append(data_list_relationships[next_word_index])
-            else:
-                next_word_index = loop + 1
-                next_words.append(data_list_relationships[next_word_index])
-        loop += 1
+    for i in range(len(data_list_relationships) - combo_size + 1):
+        if ' '.join(data_list_relationships[i:i+combo_size]) == prompt:
+            if i + combo_size < len(data_list_relationships):
+                next_word = data_list_relationships[i + combo_size]
+                if next_word in next_words:
+                    next_words[next_word] += 1
+                else:
+                    next_words[next_word] = 1
 
     return next_words
-
-
-def probable_next_word(possible_words):
-    word_count = {}
-
-    for word in possible_words:
-        if word in word_count:
-            word_count[word] += 1
-        else:
-            word_count[word] = 1
-
-    # print(len(word_count))
-    return word_count
-
 
 def most_probable_word(word_count):
     values = list(word_count.values())
@@ -61,17 +39,12 @@ def most_probable_word(word_count):
   
         return most_probable_word
 
-
 prompt = input("Prompt: ")
 
 while True:
     try:
-        possible_words = total_next_outcomes(data, prompt)
-
-        word_count = probable_next_word(possible_words)
-
-        next_word = most_probable_word(word_count)
-        next_word = next_word.split().pop()
+        next_words = total_next_outcomes(data, prompt)
+        next_word = most_probable_word(next_words)
 
         if context_words[-3:] == context_words[-6:-3] and (len(context_words)) != 0:
             next_word = (next_word) + '.'
@@ -82,12 +55,11 @@ while True:
         if next_word.endswith("."):
             break
 
-        # print(' '.join(context_words[-3:]))
         print('*' * len(context_words))
 
+        # prompt = ' '.join(context_words[-2:])
         
-        prompt = ' '.join(context_words[-1:])
-
+        prompt = ' '.join(context_words)
 
     except IndexError:
         print("IndexError")
