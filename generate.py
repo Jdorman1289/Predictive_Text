@@ -19,7 +19,7 @@ def total_next_outcomes(data, prompt):
                     next_words[next_word] += 1
                 else:
                     next_words[next_word] = 1
-
+    # print(len(next_words))
     return next_words
 
 def most_probable_word(word_count):
@@ -36,7 +36,7 @@ def most_probable_word(word_count):
             if value > highest_count:
                 highest_count = value
                 most_probable_word = key
-  
+
         return most_probable_word
 
 prompt = input("Prompt: ")
@@ -57,8 +57,6 @@ while True:
 
         print('*' * len(context_words))
 
-        # prompt = ' '.join(context_words[-2:])
-        
         prompt = ' '.join(context_words)
 
     except IndexError:
