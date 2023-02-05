@@ -1,4 +1,6 @@
 import random
+import time
+import os
 
 # list to store generated text
 context_words = []
@@ -6,6 +8,16 @@ context_words = []
 # open and read the file containing training data
 with open('shakespeare_set.txt','r') as file:
     data = file.read()
+
+# Print iterations progress
+def print_progress_bar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', print_end = "\r"):
+    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
+    filled_length = int(length * iteration // total)
+    bar = fill * filled_length + '-' * (length - filled_length)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = print_end)
+    # Print New Line on Complete
+    if iteration == total: 
+        print()
 
 # function to get a dictionary of possible next words and their count after the prompt
 def total_next_outcomes(data, prompt):
@@ -55,6 +67,7 @@ def most_probable_word(word_count):
 
 # get the initial prompt from the user
 prompt = input("Prompt: ")
+reference_prompt = prompt
 
 # loop to generate text continuations
 while True:
@@ -76,15 +89,25 @@ while True:
         if next_word.endswith(".") or next_word.endswith("?") or next_word.endswith("!"):
             break
 
-        # Print asterisks to indicate the length of context_words
-        print('*' * len(context_words))
-
         # Join the list of context_words into a single string to use as the next prompt
         prompt = ' '.join(context_words)
+
+        # A List of Items
+        items = context_words
+        l = len(items)
+
+        # Initial call to print 0% progress
+        print_progress_bar(0, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
+        for i, item in enumerate(items):
+            time.sleep(0.1)
+            # Update Progress Bar
+            print_progress_bar(i + 1, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
 
     # If an IndexError occurs, print "IndexError" and break out of the loop
     except IndexError:
         print("IndexError")
         break
-    
-print(' ...' + ' '.join(context_words))
+
+os.system('cls' if os.name == 'nt' else 'clear')
+print("\nGenerated Text:\n")    
+print(f"{reference_prompt} " + ' '.join(context_words))
