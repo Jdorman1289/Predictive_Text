@@ -116,7 +116,7 @@ while True:
     except IndexError:
         os.system('cls' if os.name == 'nt' else 'clear')
         print(f"\n{reference_prompt} " + ' '.join(context_words))
-        quit_on_shakespeare = input("\nShakespeare has no suggestions for that. Would you like to continue? Press 1 to continue or 2 to end. ")
+        quit_on_shakespeare = input("\nShakespeare has no suggestions for that.\nWould you like to continue? Press 1 to continue or 2 to end. ")
         if quit_on_shakespeare == '1':
             prompt = input("Prompt: ")
             context_words.append(prompt)
