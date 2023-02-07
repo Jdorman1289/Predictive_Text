@@ -94,7 +94,7 @@ while True:
             context_words.append(prompt)
 
         
-        if context_words[-1] == '.' or context_words[-1] == '!' or context_words[-1] == '?':
+        if f"{context_words[-1]}".endswith('.') or f"{context_words[-1]}".endswith('?') or f"{context_words[-1]}".endswith('!'):
             is_done = input("\n\nWould you like to continue? Press 1 to continue or 2 to end.\n")
             if is_done == '1':
                 prompt = input("Prompt: ")
@@ -123,6 +123,8 @@ while True:
         else:
             break
 
+
+os.system('cls' if os.name == 'nt' else 'clear')
 # print the generated text
 print("\nGenerated Text:\n")    
 print(f"{reference_prompt} " + ' '.join(context_words))
