@@ -16,7 +16,12 @@ To run the script, type the following command in the terminal:
 python generate.py
 ```
 
-And enter the prompt when prompted. The generated text will be displayed at the end.
+To run the Endless Text Generation mode, type the following command in the terminal:
+
+```
+python endless.py
+``` 
+
 
 ## Note
 
