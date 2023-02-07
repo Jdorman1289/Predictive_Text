@@ -112,7 +112,7 @@ while True:
             # Update Progress Bar
             print_progress_bar(i + 1, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
 
-    # If an IndexError occurs, print "IndexError" and break out of the loop
+    # if the prompt is not in the training data, ask the user to enter a new prompt
     except IndexError:
         os.system('cls' if os.name == 'nt' else 'clear')
         print(f"\n{reference_prompt} " + ' '.join(context_words))
