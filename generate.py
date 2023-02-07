@@ -76,21 +76,30 @@ while True:
         next_words = total_next_outcomes(data, prompt)
         # get the most probable next word
         next_word = most_probable_word(next_words)
+ 
+        # clear the screen
+        os.system('cls' if os.name == 'nt' else 'clear')
+        
+        print(f"{reference_prompt} " + ' '.join(context_words))
 
-        # if the last 3 generated words are equal to the 3 words before them,
-        # add a period to the next word to end the text
-        if context_words[-3:] == context_words[-6:-3] and (len(context_words)) != 0:
-            next_word = (next_word) + '.'
+
+        is_keeping = input(f"suggested word: '{next_word}'\n\nPress 1 to keep or 2 to change. ")
+        if is_keeping == '1':
             context_words.append(next_word)
+
+            # Join the list of context_words into a single string to use as the next prompt
+            prompt = ' '.join(context_words)
         else:
-            context_words.append(next_word)
+            prompt = input("Enter the next word: ")
+            context_words.append(prompt)
 
-        # if the next word ends with a period, question mark, or exclamation mark, break the loop
-        if next_word.endswith(".") or next_word.endswith("?") or next_word.endswith("!"):
-            break
-
-        # Join the list of context_words into a single string to use as the next prompt
-        prompt = ' '.join(context_words)
+        
+        if context_words[-1] == '.' or context_words[-1] == '!' or context_words[-1] == '?':
+            is_done = input("\n\nWould you like to continue? Press 1 to continue or 2 to end.\n")
+            if is_done == '1':
+                prompt = input("Prompt: ")
+            else:
+                break
 
         # A List of Items
         items = context_words
@@ -105,9 +114,15 @@ while True:
 
     # If an IndexError occurs, print "IndexError" and break out of the loop
     except IndexError:
-        print("IndexError")
-        break
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(f"\n{reference_prompt} " + ' '.join(context_words))
+        quit_on_shakespeare = input("\nShakespeare has no suggestions for that. Would you like to continue? Press 1 to continue or 2 to end. ")
+        if quit_on_shakespeare == '1':
+            prompt = input("Prompt: ")
+            context_words.append(prompt)
+        else:
+            break
 
-os.system('cls' if os.name == 'nt' else 'clear')
+# print the generated text
 print("\nGenerated Text:\n")    
 print(f"{reference_prompt} " + ' '.join(context_words))
