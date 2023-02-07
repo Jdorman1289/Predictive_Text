@@ -7,8 +7,6 @@ This script is used to generate text based on Shakespeare's works using an N-gra
 - The script reads in the text of Shakespeare's works and stores it in a variable `data`.
 - The function `total_next_outcomes` takes the `data` and a prompt as input and returns a dictionary of next words and their frequency of appearance in the data, given the prompt.
 - The function `most_probable_word` takes the dictionary of next words and their frequency of appearance and returns the next word with the highest frequency.
-- The script takes a prompt as input and uses `total_next_outcomes` and `most_probable_word` to generate the next word that is most likely to follow the prompt.
-- The generated text continues until the next word ends with a period, question mark, or exclamation mark, and the generated text is then printed.
 
 ## Usage
 
