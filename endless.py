@@ -85,7 +85,7 @@ while True:
         context_words.append(next_word)
 
         # Join the list of context_words into a single string to use as the next prompt
-        prompt = ' '.join(context_words[-1:])
+        prompt = ' '.join(context_words[-3:])
 
 
         # A List of Items
