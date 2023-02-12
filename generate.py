@@ -4,6 +4,7 @@ import os
 
 # list to store generated text
 context_words = []
+ptext = "Prompt: "
 
 # open and read the file containing training data
 with open('shakespeare_set.txt','r') as file:
@@ -66,7 +67,7 @@ def most_probable_word(word_count):
         return most_probable_word
 
 # get the initial prompt from the user
-prompt = input("Prompt: ")
+prompt = input(ptext)
 reference_prompt = prompt
 
 # loop to generate text continuations
@@ -97,7 +98,7 @@ while True:
         if f"{context_words[-1]}".endswith('.') or f"{context_words[-1]}".endswith('?') or f"{context_words[-1]}".endswith('!'):
             is_done = input("\n\nWould you like to continue? Press 1 to continue or 2 to end.\n")
             if is_done == '1':
-                prompt = input("Prompt: ")
+                prompt = input(ptext)
             else:
                 break
 
@@ -118,7 +119,7 @@ while True:
         print(f"\n{reference_prompt} " + ' '.join(context_words))
         quit_on_shakespeare = input("\nShakespeare has no suggestions for that.\nWould you like to continue? Press 1 to continue or 2 to end. ")
         if quit_on_shakespeare == '1':
-            prompt = input("Prompt: ")
+            prompt = input(ptext)
             context_words.append(prompt)
         else:
             break
