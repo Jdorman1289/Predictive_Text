@@ -16,13 +16,6 @@ To run the script, type the following command in the terminal:
 python generate.py
 ```
 
-To run the Endless Text Generation mode, type the following command in the terminal:
-
-```
-python endless.py
-``` 
-
-
 ## Note
 
 The script uses a pre-existing file named `shakespeare_set.txt`, which contains the text of Shakespeare's works. Make sure the file is in the same directory as the script.
