@@ -10,7 +10,7 @@ ptext = "Prompt: "
 with open('shakespeare_set.txt','r') as file:
     data = file.read()
 
-# Print iterations progress
+# Print iterations progress (thank you stack overflow!)
 def print_progress_bar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', print_end = "\r"):
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filled_length = int(length * iteration // total)
