@@ -20,8 +20,12 @@ uvicorn generate:app --reload
 
 The script uses a pre-existing file named `shakespeare_set.txt`, which contains the text of Shakespeare's works. Make sure the file is in the same directory as the script.
 
+
+https://github.com/user-attachments/assets/a4554877-dd85-4c5a-9c4e-6f06ffcf4cc8
+
+
 ## Demo
 
 
-https://github.com/Jdorman1289/Predictive_Text/assets/103331059/55acbf3d-6f08-4fac-9caa-e0f81d94696d
+
 
