@@ -1,33 +1,24 @@
 import random
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from fastapi.middleware.cors import CORSMiddleware
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 
-app = FastAPI()
-
-class Prompt(BaseModel):
-    text: str
+app = Flask(__name__)
 
 origins = [
     "http://127.0.0.1:5500",
     "http://127.0.0.1:8000",
 ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+CORS(app, resources={r"/*": {"origins": origins}})
 
-@app.post("/suggest/")
-async def suggest_next_word(prompt: Prompt):
+@app.route("/suggest/", methods=["POST"])
+def suggest_next_word():
     try:
+        prompt = request.json.get('text', '')
+
         # open and read the file containing training data
         with open('shakespeare_set.txt', 'r') as file:
             data = file.read()
-
 
         # function to get a dictionary of possible next words and their count after the prompt
         def total_next_outcomes(data, prompt):
@@ -53,7 +44,6 @@ async def suggest_next_word(prompt: Prompt):
             # print(len(next_words))
             return next_words
 
-
         # function to get the most probable next word from the dictionary of next words and their count
         def most_probable_word(word_count):
             values = list(word_count.values())
@@ -76,8 +66,11 @@ async def suggest_next_word(prompt: Prompt):
                 # return the word with the highest count
                 return most_probable_word
 
-        next_words = total_next_outcomes(data, prompt.text)
+        next_words = total_next_outcomes(data, prompt)
         next_word = most_probable_word(next_words)
-        return {"next_word": next_word}
+        return jsonify({"next_word": next_word})
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        return jsonify({"error": str(e)}), 500
+
+if __name__ == "__main__":
+    app.run(port=8000)
